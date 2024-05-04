@@ -9,10 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^6.4.11",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.16.4",
+    "@stripe/stripe-js": "^2.1.2",
+    "canvas-confetti": "^1.6.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
+    "next-sanity": "^5.4.6",
+    "next-sanity-image": "^6.1.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
+    "sanity": "^3.16.4",
+    "stripe": "^13.5.0",
+    "styled-components": "5.2",
+    "use-dark-mode": "^2.3.1"
   }
 }
