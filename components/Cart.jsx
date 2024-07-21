@@ -11,10 +11,11 @@ import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
 import { useStateContext } from "@/context/StateContext";
 import { urlFor } from "@/lib/client";
-
+import { useRouter } from 'next/router';
 import getStripe from "@/lib/getStripe";
 
 const Cart = () => {
+  const router = useRouter();
   const cartRef = useRef();
   const {
     totalPrice,
@@ -25,24 +26,9 @@ const Cart = () => {
     onRemove,
   } = useStateContext();
 
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-
-    const response = await fetch("/api/stripe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartItems),
-    });
-
-    if (response.statusCode === 500) return;
-
-    const data = await response.json();
-
-    toast.loading("Redirecting...");
-
-    stripe.redirectToCheckout({ sessionId: data.id });
+  const handlePayment = async () => {
+    router.push('/checkout'); // Redirect to checkout page
+    setShowCart(false);
   };
 
   let cartDisplay = null;
@@ -112,10 +98,10 @@ const Cart = () => {
     subDisplay = (
       <div className="cart-bottom">
         <div className="btn-container">
-          <button type="button" className="btn-stripe" onClick={handleCheckout}>
+          <button type="button" className="btn-stripe" onClick={handlePayment}>
             Pay With Stripe
           </button>
-          <button type="button" className="btn-momo" onClick={handleCheckout}>
+          <button type="button" className="btn-momo" onClick={handlePayment}>
             Pay With Momo
           </button>
         </div>

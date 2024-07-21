@@ -9,7 +9,8 @@ import {
 import { Product } from "@/components";
 import { useStateContext } from "@/context/StateContext";
 
-const ProductDetails = ({ product, products }) => {
+const ProductDetails = ({ products, product }) => {
+  console.log(product.image);
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, onAdd } = useStateContext();
@@ -19,7 +20,7 @@ const ProductDetails = ({ product, products }) => {
       <div className="product-detail-container">
         <div>
           <div className="image-container">
-            {image && image.length > 0 ? (
+            {image && image?.length > 0 ? (
               <img
                 src={urlFor(image[index])}
                 alt={name}
@@ -31,7 +32,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
           <div className="small-images-container">
             {image?.map((item, i) => (
-              <img
+              <img key={i}
                 src={urlFor(item)}
                 className={
                   i === index ? "small-image selected-image" : "small-image"
